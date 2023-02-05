@@ -63,7 +63,7 @@ function init(response) {
 
   // call this function when user is done building out team
   function generateManagerHTML (manager) {
-    fs.writeFile("./index.html",
+    fs.writeFile("./dist/index.html",
     `manager role: 
     ${manager.getRole()}
     `, (err) => err ? console.log(err) : console.log("HTML generated!"));
