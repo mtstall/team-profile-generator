@@ -2,6 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const Manager = require("./lib/Manager.js");
+console.log(Manager);
 
 // array of questions for user input
 const managerQuestions = [
@@ -46,24 +47,12 @@ const managerQuestions = [
       }
 ]
 
-class Teammate {
-    constructor(name, empID, email, extraInfo) {
-        this.name = name;
-        this.empID = empID;
-        this.email = email;
-        this.extraInfo = extraInfo;
-    }
-
-    printTeammateInfo() {
-        console.log(`${this.name}, ${this.empID}, ${this.email}, ${this.extraInfo}`);
-    }
-}
-
 // initialize function
 function init(response) {
     inquirer.prompt(managerQuestions).then((response) => {
+      const manager = new Manager(response.name,response.id,response.email,response.managerofficenum);
         if (response.nextoption === 'Finish building your team.') {
-        generateManagerHTML(response);
+        generateManagerHTML(manager);
         }
     return; 
     }
@@ -73,24 +62,10 @@ function init(response) {
   init();
 
   // call this function when user is done building out team
-  function generateManagerHTML (response) {
+  function generateManagerHTML (manager) {
     fs.writeFile("./index.html",
-    `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${response.managername}</title>
-    </head>
-    <body>
-        <p>${response.location}</p>
-        <p>${response.bio}</p>
-        <p><a href="${response.linkedin}">LinkedIn</a></p>
-        <p><a href="${response.github}">GitHub</a></p>
-    </body>
-    </html>
+    `manager role: 
+    ${manager.getRole()}
     `, (err) => err ? console.log(err) : console.log("HTML generated!"));
   }
 
