@@ -1,6 +1,7 @@
 // packages needed for this application
 const inquirer = require("inquirer");
 const fs = require("fs");
+const Manager = require("./lib/Manager.js");
 
 // array of questions for user input
 const managerQuestions = [
@@ -35,8 +36,8 @@ const managerQuestions = [
       {
         type: "list",
         choices: [
-            {name: 'Add an engineer to the team'},
-            {name: 'Add an intern to the team'},
+            {name: 'Engineer'},
+            {name: 'Intern'},
             {name: 'Finish building your team.'},
         ],
         message: "Add an engineer, add an intern, or finish building your team.",
@@ -61,10 +62,9 @@ class Teammate {
 // initialize function
 function init(response) {
     inquirer.prompt(managerQuestions).then((response) => {
-        showResponses(response);
         if (response.nextoption === 'Finish building your team.') {
-        generateHTML(response);
-    }
+        generateManagerHTML(response);
+        }
     return; 
     }
     )
@@ -72,13 +72,8 @@ function init(response) {
   
   init();
 
-  // show responsees
-  function showResponses(response) {
-    console.log(response.managername);
-  }
-
   // call this function when user is done building out team
-  function generateHTML (response) {
+  function generateManagerHTML (response) {
     fs.writeFile("./index.html",
     `
     <!DOCTYPE html>
@@ -87,7 +82,7 @@ function init(response) {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${response.name}</title>
+        <title>${response.managername}</title>
     </head>
     <body>
         <p>${response.location}</p>
