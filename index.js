@@ -170,30 +170,44 @@ function nextQuestions(response) {
 
 function generateHTML (teamArray) {
   console.log(teamArray);
-  if (teamArray.getRole() === 'Manager') {
-    let xtrainfo = 
-  }
+  // if (teamArray.getRole() === 'Manager') {
+  //   let xtrainfo = 
+  // }
   console.log(teamArray[0].getRole());
   console.log(teamArray[0].xtrainfo);
-  for (let i = 0; i < teamArray.length; i++) {
-    //generate a card for each team member
-    return `
+  // for (let i = 0; i < teamArray.length; i++) {
+    //generate a card for each team member 
+    const cardArray = teamArray.map( teamMember =>`
     <div class="card">
 <div class="card-header">
-    <h2>${teamArray[i].name}</h2>  
-    <h2><i class="far fa-user"></i> ${teamArray[i].getRole()}</h2>
+    <h2>${teamMember.empName}</h2>  
+    <h2><i class="far fa-user"></i> ${teamMember.getRole()}</h2>
     <hr>
 </div>
 <div class="card-body">
     <ul>
-        <li>ID: ${teamArray[i].empid}</li>
-        <li>Email: ${teamArray[i].email}</li>
-        <li>${teamArray[i].xtrainfo} </li>
+        <li>ID: ${teamMember.id}</li>
+        <li>Email: ${teamMember.email}</li>
+        <li>${teamMember.xtrainfo} </li>
     </ul>
 </div>
 </div>
-    `
-  }
+    `)
+  // }
+
+  const htmlWrapper = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+  </head>
+  <body>
+      ${cardArray.join("")}
+  </body>
+  </html>`;
+  console.log(htmlWrapper);
 
 }
 
