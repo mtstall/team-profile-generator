@@ -185,6 +185,7 @@ function generateHTML (teamArray) {
     </div>
     `)
 
+    // generate html that card html will reside within
   const htmlWrapper = `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -213,6 +214,7 @@ function generateHTML (teamArray) {
 
 }
 
+// if user selected engineer, run questions for engineers
 function engineerInquirer(response) {
   inquirer.prompt(engineerQuestions).then((response) => {
     const engineer = new Engineer(
@@ -227,6 +229,7 @@ function engineerInquirer(response) {
   });
 }
 
+// if user selected intern, run questions for interns
 function internInquirer(response) {
   inquirer.prompt(internQuestions).then((response) => {
     const intern = new Intern(
@@ -239,17 +242,6 @@ function internInquirer(response) {
     teamArray.push(intern);
     nextQuestions(response);
   });
-}
-
-// call this function when user is done building out team
-function generateManagerHTML(manager) {
-  fs.writeFile(
-    "./dist/index.html",
-    `manager role: 
-    ${manager.getRole()}
-    `,
-    (err) => (err ? console.log(err) : console.log("HTML generated!"))
-  );
 }
 
 // validate input
