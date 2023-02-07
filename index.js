@@ -168,7 +168,6 @@ function nextQuestions(response) {
 }
 
 function generateHTML (teamArray) {
-  console.log(teamArray);
     //generate html for a card for each team member within an array using .map
     const cardArray = teamArray.map( teamMember =>`
     <div class="card" style="width: 18rem;">
@@ -182,6 +181,7 @@ function generateHTML (teamArray) {
                 <li>${teamMember.xtrainfo}</li>
             </ul>
         </p>
+        </div>
     </div>
     `)
 
@@ -197,8 +197,8 @@ function generateHTML (teamArray) {
       <title>My Team</title>
   </head>
   <body>
-  <h1>My Team</h1>
-  <div id = "cards">
+  <h1 class = "text-center">My Team</h1>
+  <div class = "row justify-content-center">
       ${cardArray.join("")}
     </div>
   </body>
