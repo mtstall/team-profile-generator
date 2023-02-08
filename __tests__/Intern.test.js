@@ -3,7 +3,7 @@ const Intern = require("../lib/Intern");
 describe("intern", () => {
     // tests for methods
   describe("get role", () => {
-    it("should return engineer as role", () => {
+    it("should return intern as role", () => {
       const e = new Intern("Taylor", "0123", "mtstallings95@gmail.com","School of Hard Knocks");
       expect(e.getRole()).toBe("Intern");
     });
